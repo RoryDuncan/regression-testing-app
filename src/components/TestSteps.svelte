@@ -4,11 +4,6 @@
 
 <style>
 
-	h5 {
-		margin: 0;
-		padding: 0.5rem 0rem;
-	}
-	
 	ol {
 		margin: 0.25rem 0;
 	}

@@ -1,48 +1,52 @@
 <script>
-	import { data } from "@services/mock-data.js";
-	import FeatureTest from "@components/FeatureTest.svelte";
-	import TestHeader from "@components/TestHeader.svelte";
-	import TestSteps from "@components/TestSteps.svelte";
-	import TestInstructions from "@components/TestInstructions.svelte";
-	import FeatureTestHeading from "@components/FeatureTestHeading.svelte";
-	import Overview from "@components/Overview.svelte";
+  import { data as items } from "@services/mock-data.js";
+  import { TEST_STATE } from "@config/constants.js";
+  import FeatureTest from "@components/FeatureTest.svelte";
+  import TestHeader from "@components/TestHeader.svelte";
+  import TestSteps from "@components/TestSteps.svelte";
+  import TestInstructions from "@components/TestInstructions.svelte";
+  import FeatureTestHeading from "@components/FeatureTestHeading.svelte";
+  import Overview from "@components/Overview.svelte";
 
-	let items = data;
-
-
+  const gifLink = "https://media.giphy.com/media/cyd9pp3G33l1CF8sA8/giphy.gif";
 </script>
 
 <style>
-
-	:global(body) {
-		overflow-y: scroll;
+	.split-view {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1rem;
 	}
-
-	:global(.muted) {
-		opacity: 0.5;
-	}
-
-	:global(*) {
-		box-sizing: border-box;
-	}
-
 </style>
 
 <Overview />
 
 <FeatureTestHeading />
 {#each items as item, i}
-	<FeatureTest {...item} >
-		<div class="test-details">
-			<TestHeader configURL={item.configURL} testURL={item.testURL} />
-			<TestSteps steps={item.steps} />
-			<TestInstructions instructions={item.instructions} />
+  <FeatureTest {...item} bind:status={item.status}>
+    <div class="split-view">
+      <div class="test-details">
+        <TestHeader configURL={item.configURL} testURL={item.testURL} />
+        <TestSteps steps={item.steps} />
+        <TestInstructions instructions={item.instructions} />
+      </div>
+      <div class="test-feedback">
+	  	<h5>Gif / Video</h5>
+		<p>
+			<img src={gifLink} alt="frog" />
+		</p>
+		<div class="text-right">
+			<button>Upload New</button>
 		</div>
-		<div class="test-feedback">
-			<h1>
+        <h5>Issues</h5>
+		<textarea value="None"></textarea>
 
-			</h1>
-		</div>
+		{#if item.status === TEST_STATE.REGRESSED}
+			<h5>Link to Regression Task</h5>
+			<input type="text" value="https://worktruck.visualstudio.com/WTS-Suite/_workitems/edit/"/>
+		{/if}
 
-	</FeatureTest>
+      </div>
+    </div>
+  </FeatureTest>
 {/each}
