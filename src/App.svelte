@@ -26,6 +26,10 @@
   }
 </style>
 
+<svelte:head>
+	<title>MVP: Regression Testing App</title>
+</svelte:head>
+
 <SprintDetails />
 
 <div class="container">
