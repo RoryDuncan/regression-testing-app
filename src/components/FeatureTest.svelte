@@ -1,33 +1,33 @@
 <script>
-	import { TESTED_BY, TEST_STATE, TEST_STATE_LABELS } from "./constants.js";
-	import Collapsible from "./Collapsible.svelte";
-	import StatusNode from "./StatusNode.svelte";
-	import { statuses } from "./overview.js";
-	
+	import { TESTED_BY, TEST_STATE, TEST_STATE_LABELS } from "@config/constants.js";
+	import Collapsible from "@components/Collapsible.svelte";
+	import StatusNode from "@components/StatusNode.svelte";
+	import { statuses } from "@stores/overview.js";
+
 	export let isOpen = false;
-	
+
 	export let id;
 	export let areas = [];
 	export let title = null;
-	
+
 	//export let configURL = null;
 	//export let testURL = null;
-	
+
 	export let status = TEST_STATE.UNTESTED;
 	export let testedBy = TESTED_BY.NONE;
-	
+
 	//export let media = null;
-	
+
 	$: isTestedByDisabled = status === TEST_STATE.UNTESTED;
 	let isTestedByEl = null;
 	function focusIsTestedBy() {
 		isTestedByEl.focus();
 	}
-	
+
 	$: if (status) {
-		statuses.update( m => m.set(id, status));	
+		statuses.update( m => m.set(id, status));
 	}
-	
+
 
 </script>
 
@@ -40,22 +40,22 @@
 		grid-gap: 0.5rem;
 		border: 1px solid #eee;
 	}
-	
+
 	.muted {
 		opacity: 0.5;
 	}
-	
+
 	.title {
 		margin: 0;
 		font-size: 1.2rem;
 		cursor: pointer;
 	}
-	
+
 	.areas {
 		display: block;
 		font-size: 0;
 	}
-	
+
 	.area {
 		color: #bbb;
 		font-size: 0.75rem;
@@ -67,19 +67,19 @@
 		opacity: 0.5;
 		font-size: 1rem;
 	}
-	
+
 	select {
 		display: block;
 		width: 100%;
 	}
-	
+
 	label {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 	}
-	
+
 	label span {
 		display: none;
 	}

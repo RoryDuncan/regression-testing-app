@@ -1,10 +1,10 @@
 <script>
-	import { statuses, countMap, progress, total } from "./overview.js";
-	import { TEST_STATE_LABELS } from "./constants.js";
-	import Collapsible from "./Collapsible.svelte";
-	
+	import { statuses, countMap, progress, total } from "@stores/overview.js";
+	import { TEST_STATE_LABELS } from "@config/constants.js";
+	import Collapsible from "@components/Collapsible.svelte";
+
 	$: isComplete = $progress >= 1;
-	
+
 	let isOpen = false;
 </script>
 
@@ -16,32 +16,32 @@
 		border-radius: 6px;
 		transition: 2s ease-out all;
 	}
-	
+
 	.complete {
 		background-color: #afc;
 		font-weight: 600;
-		
+
 		margin: 25vh 10vw;
 	}
-	
+
 	h2 {
 		margin: 0;
 	}
-	
+
 	.progress {
 		margin-bottom: 1rem;
 	}
-	
+
 	.breakdown-title {
 		cursor: pointer;
 		padding: 0rem;
 	}
-	
+
 	.breakdown {
 		list-style: none;
 		padding: 0.5rem;
 	}
-	
+
 	.breakdown li {
 		display: grid;
 		grid-template-columns: auto 6rem 1fr;
@@ -66,7 +66,7 @@
 						<strong>{TEST_STATE_LABELS[key]}</strong>
 						<span>{value} of {$total}</span>
 				</li>
-			{/each}	
+			{/each}
 			</ul>
 		</div>
 	</Collapsible>

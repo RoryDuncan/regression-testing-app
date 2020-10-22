@@ -1,9 +1,9 @@
 <script>
-	import { TEST_STATE, TEST_STATE_COLORS } from "./constants.js";
+	import { TEST_STATE, TEST_STATE_COLORS } from "@config/constants.js";
 	export let status = TEST_STATE.UNTESTED;
 	export let isDot = false;
 
-	
+
 	$: color = TEST_STATE_COLORS[status];
 	$: style = `background: ${color};`;
 </script>
@@ -13,7 +13,7 @@
 	.node {
 		transition: 0.5s ease-out all;
 	}
-	
+
 	.circle {
 		width: 1rem;
 		height: 1rem;
@@ -21,13 +21,13 @@
 		margin: auto auto;
 		display: block;
 	}
-	
+
 	.border {
 		width: 4px;
 		border-radius: 4px;
 		margin: -0.5rem 0;
 		margin-left: calc( -1 * 0.25rem);
-		
+
 	}
 
 </style>

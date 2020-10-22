@@ -3,12 +3,23 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import alias from '@rollup/plugin-alias';
+
+const entries = [
+	{ find: "@components", replacement: `${__dirname}/src/components`},
+	{ find: "@icons", replacement: `${__dirname}/src/icons`},
+	{ find: "@services", replacement: `${__dirname}/src/services`},
+	{ find: "@stores", replacement: `${__dirname}/src/stores`},
+	{ find: "@providers", replacement: `${__dirname}/src/providers`},
+	{ find: "@utils", replacement: `${__dirname}/src/utils.js`},
+	{ find: "@config", replacement: `${__dirname}/src/config`},
+];
 
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
 	let server;
-	
+
 	function toExit() {
 		if (server) server.kill(0);
 	}
@@ -36,6 +47,7 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		alias({ entries, }),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,

@@ -1,5 +1,5 @@
 import { writable, derived } from "svelte/store";
-import { TEST_STATE } from "./constants.js";
+import { TEST_STATE } from "@config/constants.js";
 
 export const statuses = writable(new Map());
 
@@ -9,7 +9,7 @@ export const countMap = derived(statuses, ($statuses) => {
 		const values = [...$statuses.values()];
 		var result = values
 			.reduce(toCount, Object.create(null))
-	
+
 		return result;
 });
 
