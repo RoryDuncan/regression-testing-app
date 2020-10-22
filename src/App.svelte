@@ -24,6 +24,10 @@
     max-width: 90rem;
     margin: 0 auto;
   }
+
+  img {
+	  width: 100%;
+  }
 </style>
 
 <svelte:head>
